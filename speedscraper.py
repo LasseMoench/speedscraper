@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import requests
 import sqlite3
 import os
@@ -5,10 +8,10 @@ import datetime
 import subprocess
 from bs4 import BeautifulSoup
 
-phone_nums = ["+4915731234567", "+4915787654321"]
+phone_nums = ["+4916731234567"]
 
 if not os.path.exists("speedtraps.db"):
-    print("Datenbank tempdata.db nicht vorhanden - Datenbank wird anglegt.")
+    print("Datenbank speedtraps.db nicht vorhanden - Datenbank wird anglegt.")
     connection = sqlite3.connect("speedtraps.db")
     cursor = connection.cursor()
     # Tabelle erzeugen
@@ -23,7 +26,7 @@ response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
 table_rows = soup.find_all('tr')
 
-message = "Guten Morgen!\r\nIch bin's, der Blitzerbot. Heute wird an folgenden Orten geblitzt:\r\n"
+message = u'Guten Morgen 🤖!\r\nHeute wird an folgenden Orten geblitzt:\r\n'
 
 for row in table_rows:
     cols = row.find_all('td')
